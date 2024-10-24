@@ -40,6 +40,11 @@ const Navbar = () => {
             <Link to="/manage">Manage</Link>
           </Menu.Item>
         )}
+        {isLoggedIn&&(userrole === 'staff'|| userrole ==="trainer") && (
+          <Menu.Item key="booking-calendar" icon={<AppstoreOutlined />}>
+            <Link to="/booking-calendar">Calendar</Link>
+          </Menu.Item>
+        )}
         <Menu.Item key="enrollments" icon={<AppstoreOutlined />}>
           <Link to="/enrollments">Enrollments</Link>
         </Menu.Item>

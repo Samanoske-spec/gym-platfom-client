@@ -10,6 +10,7 @@ import Navbar from './components/Navbar/Navbar'; // Import the Navbar
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import UserProfile from './pages/userProfile';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
+import BookingCalendar from './pages/BookingCalendar';
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/trainer" element={<ProtectedRoute><TrainerDashboard /></ProtectedRoute>} />
         <Route path='/manage' element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path='/booking-calendar' element={<ProtectedRoute><BookingCalendar /></ProtectedRoute>} />
         <Route path="/enrollments" element={<ProtectedRoute><UserEnrollments /></ProtectedRoute>} />
         <Route path="/create-site" element={<ProtectedRoute><CreateSite /></ProtectedRoute>} />
         <Route path="/preview-site" element={<ProtectedRoute><PreviewSite /></ProtectedRoute>} />
