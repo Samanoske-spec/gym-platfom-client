@@ -6,7 +6,7 @@ import moment from 'moment';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-const BookingCalendar = ({ userRole }) => {
+const AdminBookingCalendar = ({ userRole }) => {
   const [bookings, setBookings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
@@ -198,4 +198,4 @@ const BookingCalendar = ({ userRole }) => {
   );
 };
 
-export default BookingCalendar;
+export default AdminBookingCalendar;
