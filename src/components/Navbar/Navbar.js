@@ -36,18 +36,23 @@ const Navbar = () => {
           </Menu.Item>
         )}
         {isLoggedIn&&userrole === 'staff' && (
-          <Menu.Item key="manage" icon={<AppstoreOutlined />}>
-            <Link to="/manage">Manage</Link>
-          </Menu.Item>
+          <>
+            <Menu.Item key="manage" icon={<AppstoreOutlined />}>
+              <Link to="/manage">Manage</Link>
+            </Menu.Item>
+            <Menu.Item key="admin-booking-calendar" icon={<AppstoreOutlined />}>
+            <Link to="/admin-booking-calendar">Calendar</Link>
+            </Menu.Item>
+            <Menu.Item key="manage-space" icon={<AppstoreOutlined />}>
+            <Link to="/manage-space">Space Manage</Link>
+            </Menu.Item>
+          </>
         )}
-        {isLoggedIn&&(userrole === 'staff'|| userrole ==="trainer") && (
+        {isLoggedIn&&userrole ==="trainer" && (
           <Menu.Item key="booking-calendar" icon={<AppstoreOutlined />}>
             <Link to="/booking-calendar">Calendar</Link>
           </Menu.Item>
         )}
-        <Menu.Item key="enrollments" icon={<AppstoreOutlined />}>
-          <Link to="/enrollments">Enrollments</Link>
-        </Menu.Item>
         <Menu.Item key="create-site" icon={<FileTextOutlined />}>
           <Link to="/create-site">Create Site</Link>
         </Menu.Item>

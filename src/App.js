@@ -11,6 +11,8 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import UserProfile from './pages/userProfile';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
 import BookingCalendar from './pages/BookingCalendar';
+import AdminBookingCalendar from './components/Dashboard/AdminBookingCalendar';
+import SpaceManager from './components/Dashboard/SpaceManager';
 function App() {
   return (
     <Router>
@@ -25,6 +27,8 @@ function App() {
         <Route path="/create-site" element={<ProtectedRoute><CreateSite /></ProtectedRoute>} />
         <Route path="/preview-site" element={<ProtectedRoute><PreviewSite /></ProtectedRoute>} />
         <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+        <Route path="/admin-booking-calendar" element={<ProtectedRoute><AdminBookingCalendar /></ProtectedRoute>} />
+        <Route path="/manage-space" element={<ProtectedRoute><SpaceManager /></ProtectedRoute>} />
         <Route path="*" element={<Login />} />
       </Routes>
     </Router>
