@@ -10,7 +10,7 @@ import Navbar from './components/Navbar/Navbar'; // Import the Navbar
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import UserProfile from './pages/userProfile';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
-import BookingCalendar from './pages/BookingCalendar';
+import BookingCalendar from './pages/TrainerBookingCalendar';
 import AdminBookingCalendar from './components/Dashboard/AdminBookingCalendar';
 import SpaceManager from './components/Dashboard/SpaceManager';
 function App() {

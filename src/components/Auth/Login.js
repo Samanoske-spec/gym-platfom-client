@@ -13,6 +13,7 @@ const Login = () => {
       const response = await api.post('/auth/login', values);
       localStorage.setItem('token', response.data.token); // Store JWT token in localStorage
       localStorage.setItem('role', response.data.role);
+      localStorage.setItem('userId', response.data.userId)
       notification.success({ message: 'Login Successful' });
       navigate('/trainer'); // Redirect to dashboard or trainer page
     } catch (error) {
