@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const api = axios.create({
+  // baseURL: 'http://54.151.161.131', // Update this if your backend runs on a different host/port
   baseURL: 'http://localhost:5000', // Update this if your backend runs on a different host/port
 });
 
