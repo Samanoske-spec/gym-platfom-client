@@ -57,22 +57,17 @@ const TrainerBookingCalendar = ({ currentUser }) => {
     var tempdate = new Date();
     tempdate = date.toDate();
     var ddate = tempdate.getYear() + '-' + tempdate.getMonth() + '-' + tempdate.getDate();
-    const currentDate = moment(date).startOf('day'); // Use the provided `date` parameter
-    const nativeDateString = date.toDate().toString(); // Convert Moment object to native Date string
-    // console.log('Native Date String:', nativeDateString);
   
     const dayBookings = bookings.filter((booking) => {
-      if (!booking || !booking.start_time) return false; // Validate booking
+      if (!booking || !booking.start_time) return false;
       const bookingData = new Date(booking.start_time);
-      if (booking.recurrence === 'daily') return true; // Show daily bookings every day
+      if (booking.recurrence === 'daily') return true;
   
       if (booking.recurrence === 'weekly') {
         return bookingData.getDay() == tempdate.getDay();
       }
       var tempbooking = bookingData.getYear() + '-' + bookingData.getMonth() + '-' + bookingData.getDate();
-      // Match exact day for one-time bookings
       return ddate == tempbooking;
-      // return bookingDate.isSame(currentDate, 'day');
     });
   
   

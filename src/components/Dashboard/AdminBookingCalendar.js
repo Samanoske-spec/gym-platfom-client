@@ -42,17 +42,22 @@ const AdminBookingCalendar = () => {
   };
 
   const dateCellRender = (date) => {
-    const currentDate = moment(date);
-
-    // Filter bookings based on type: daily, weekly, or one-time
+    var tempdate = new Date();
+    tempdate = date.toDate();
+    var ddate = tempdate.getYear() + '-' + tempdate.getMonth() + '-' + tempdate.getDate();
+  
     const dayBookings = bookings.filter((booking) => {
+      if (!booking || !booking.start_time) return false;
+      const bookingData = new Date(booking.start_time);
       if (booking.recurrence === 'daily') return true;
+  
       if (booking.recurrence === 'weekly') {
-        const bookingDay = moment(booking.start_time).format('dddd');
-        return currentDate.format('dddd') === bookingDay;
+        return bookingData.getDay() == tempdate.getDay();
       }
-      return moment(booking.start_time).isSame(currentDate, 'day');
+      var tempbooking = bookingData.getYear() + '-' + bookingData.getMonth() + '-' + bookingData.getDate();
+      return ddate == tempbooking;
     });
+  
 
     return (
       <ul style={{ listStyle: 'none', padding: 0 }}>

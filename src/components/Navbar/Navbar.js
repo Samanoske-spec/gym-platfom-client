@@ -1,79 +1,103 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, Button, Layout } from 'antd';
-import {
-    HomeOutlined,
-    AppstoreOutlined,
-    ProfileOutlined,
-    UserOutlined,
-    FileTextOutlined,
-    EyeOutlined,
-    LogoutOutlined,
-  } from '@ant-design/icons';
+import { Layout, Menu, Button } from 'antd';
+import { CreditCardOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const { Header } = Layout;
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isLoggedIn = !!localStorage.getItem('token');
+  const userType = localStorage.getItem('userType');
+  const token = localStorage.getItem('token');
+  
+  // Check if user is admin (staff is considered admin)
+  const isAdmin = userType === 'staff' || userType === 'admin';
+
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear the token from localStorage
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token');
+    localStorage.removeItem('userType');
+    navigate('/login');
   };
-  const userrole = localStorage.getItem('role');
+
+  const items = [
+    {
+      key: 'home',
+      label: <Link to="/">Home</Link>,
+    },
+    {
+      key: 'credits',
+      icon: <CreditCardOutlined />,
+      label: 'Credits',
+      children: [
+        {
+          key: 'credit-balance',
+          label: <Link to="/credits/balance">Credit Balance</Link>,
+        },
+        {
+          key: 'buy-credits',
+          label: <Link to="/credits/packages">Buy Credits</Link>,
+        },
+        // Show manage credits option for both staff and admin
+        isAdmin && {
+          key: 'manage-credits',
+          label: <Link to="/admin/credits">Manage Credit Packages</Link>,
+        },
+      ].filter(Boolean),
+    },
+    {
+      key: 'Basedata',
+      icon: <CreditCardOutlined />,
+      label: 'Basedata',
+      children: [
+        {
+          key: 'base-venue',
+          label: <Link to="/base/venue">Venue</Link>,
+        },
+        {
+          key: 'buy-credits',
+          label: <Link to="/credits/packages">Buy Credits</Link>,
+        },
+        // Show manage credits option for both staff and admin
+        isAdmin && {
+          key: 'manage-credits',
+          label: <Link to="/admin/credits">Manage Credit Packages</Link>,
+        },
+      ].filter(Boolean),
+    },
+    {
+      key: 'profile',
+      icon: <UserOutlined />,
+      label: <Link to="/user-profile">Profile</Link>,
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: <Button type="link" onClick={handleLogout} style={{ color: 'inherit' }}>Logout</Button>,
+    },
+  ];
+
+  if (!token) {
+    return (
+      <Header>
+        <Menu theme="dark" mode="horizontal">
+          <Menu.Item key="login">
+            <Link to="/login">Login</Link>
+          </Menu.Item>
+          <Menu.Item key="register">
+            <Link to="/register">Register</Link>
+          </Menu.Item>
+        </Menu>
+      </Header>
+    );
+  }
+
   return (
-    <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div className="logo">
-        <h2 style={{ color: 'white' }}>Gym Platform</h2>
-      </div>
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
-        <Menu.Item key="home" icon={<HomeOutlined />}>
-          <Link to="/trainer">Dashboard</Link>
-        </Menu.Item>
-        {isLoggedIn && (
-          <Menu.Item key="profile" icon={<ProfileOutlined />}>
-            <Link to="/user-profile">Profile</Link>
-          </Menu.Item>
-        )}
-        {isLoggedIn&&userrole === 'staff' && (
-          <>
-            <Menu.Item key="manage" icon={<AppstoreOutlined />}>
-              <Link to="/manage">Manage</Link>
-            </Menu.Item>
-            <Menu.Item key="admin-booking-calendar" icon={<AppstoreOutlined />}>
-            <Link to="/admin-booking-calendar">Calendar</Link>
-            </Menu.Item>
-            <Menu.Item key="manage-space" icon={<AppstoreOutlined />}>
-            <Link to="/manage-space">Space Manage</Link>
-            </Menu.Item>
-          </>
-        )}
-        {isLoggedIn&&userrole ==="trainer" && (
-          <Menu.Item key="booking-calendar" icon={<AppstoreOutlined />}>
-            <Link to="/booking-calendar">Calendar</Link>
-          </Menu.Item>
-        )}
-        <Menu.Item key="create-site" icon={<FileTextOutlined />}>
-          <Link to="/create-site">Create Site</Link>
-        </Menu.Item>
-        <Menu.Item key="preview-site" icon={<EyeOutlined />}>
-          <Link to="/preview-site">Preview Site</Link>
-        </Menu.Item>
-        <Menu.Item key="login" icon={<UserOutlined />}>
-          <Link to="/login">Login</Link>
-        </Menu.Item>
-        <Menu.Item key="register" icon={<UserOutlined />}>
-          <Link to="/register">Register</Link>
-        </Menu.Item>
-      </Menu>
-      <Button
-        type="primary"
-        icon={<LogoutOutlined />}
-        onClick={handleLogout}
-        style={{ marginLeft: '20px' }}
-      >
-        Logout
-      </Button>
+    <Header>
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        items={items}
+      />
     </Header>
   );
 };

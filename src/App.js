@@ -13,6 +13,12 @@ import AdminDashboard from './components/Dashboard/AdminDashboard';
 import BookingCalendar from './pages/TrainerBookingCalendar';
 import AdminBookingCalendar from './components/Dashboard/AdminBookingCalendar';
 import SpaceManager from './components/Dashboard/SpaceManager';
+import CreditBalance from './components/Credits/CreditBalance';
+import CreditPackages from './components/Credits/CreditPackages';
+import CreditPackageManager from './components/Admin/CreditPackageManager';
+import Venue from './pages/Base/Venue';
+import 'antd/dist/reset.css'; // Add this import at the top of the file
+
 function App() {
   return (
     <Router>
@@ -29,6 +35,10 @@ function App() {
         <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
         <Route path="/admin-booking-calendar" element={<ProtectedRoute><AdminBookingCalendar /></ProtectedRoute>} />
         <Route path="/manage-space" element={<ProtectedRoute><SpaceManager /></ProtectedRoute>} />
+        <Route path="/credits/balance" element={<ProtectedRoute><CreditBalance /></ProtectedRoute>} />
+        <Route path="/credits/packages" element={<ProtectedRoute><CreditPackages /></ProtectedRoute>} />
+        <Route path="/admin/credits" element={<ProtectedRoute adminOnly><CreditPackageManager /></ProtectedRoute>} />
+        <Route path="/base/venue" element={<ProtectedRoute><Venue /></ProtectedRoute>} />
         <Route path="*" element={<Login />} />
       </Routes>
     </Router>

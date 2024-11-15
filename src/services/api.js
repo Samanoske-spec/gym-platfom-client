@@ -31,4 +31,34 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+// Credit Management API calls
+const creditAPI = {
+  // Get credit balance for a user
+  getCreditBalance: () => api.get('/api/credits/balance'),
+  
+  // Purchase credits
+  purchaseCredits: (data) => api.post('/api/credits/purchase', data),
+  
+  // Get credit packages
+  getCreditPackages: () => api.get('/api/credits/packages'),
+  
+  // Use credit (for posting venue/project or enrolling)
+  useCredit: (data) => api.post('/api/credits/use', data),
+  
+  // Get credit transaction history
+  getCreditHistory: () => api.get('/api/credits/history'),
+  
+  // Admin: Update credit package settings
+  updateCreditPackage: (packageId, data) => api.put(`/api/credits/packages/${packageId}`, data),
+  
+  // Admin: Create new credit package
+  createCreditPackage: (data) => api.post('/api/credits/packages', data),
+};
+
+// Add creditAPI to the existing api object
+const enhancedApi = {
+  ...api,
+  credits: creditAPI,
+};
+
+export default enhancedApi;
